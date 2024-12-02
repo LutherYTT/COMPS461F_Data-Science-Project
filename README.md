@@ -8,4 +8,4 @@ Group 4
 - Lu Yuk Tong 13439007
 
 # Basic Information
-food type: Drink, Sandwich, Fruit_Cup, Salad, Noodle, Rice, Vegetable, Warp, Seafood, Meat
+Suppose Food Type: Drink, Sandwich, Fruit_Cup, Salad, Noodle, Rice, Vegetable, Warp, Seafood, Meat
