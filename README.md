@@ -5,8 +5,10 @@ Group 4
 - Ng Chiu Cheuk 13458384
 - Chu Sik Hin 13372042
 - Chow Chun Ting 13342640
-- Lu Yuk Tong 13439007
+- Lu Yuk Tong 13439007 (luyuktong@gmail.com)
 
+# Supervisor
+Jimmy KANG Xudong (xkang@hkmu.edu.hk)
 # Basic Information
 Suppose Food Type: 
 - Drink
