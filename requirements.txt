@@ -1,0 +1,16 @@
+# Usage: pip install -r requirements.txt
+
+# Base ------------------------------------------------------------------------
+
+pillow==11.1.0
+numpy==2.0.2
+scikit-learn==1.6.1
+opencv-python==4.11.0.86
+pandas==2.2.2
+mlxtend==0.23.4
+matplotlib==3.10.0
+torch==2.6.0
+torchvision==0.21.0
+yaml==6.0.2
+tqdm==4.67.1
+rembg==2.0.65
