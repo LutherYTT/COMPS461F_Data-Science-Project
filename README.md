@@ -1,6 +1,6 @@
 # Group Member
 Group 4
-- Ng Sing Man 13374035
+- Ng Sing Man 13374035 (simon78451213@gmail.com)
 - Kwok Wai Chun 13448631 
 - Ng Chiu Cheuk 13458384 (brian17659@gmail.com)
 - Chu Sik Hin 13372042 (acalvin701@gmail.com)
@@ -9,11 +9,6 @@ Group 4
 
 # Supervisor
 Mr. Jimmy KANG (xkang@hkmu.edu.hk)
-
-# Dataset
-Training Data: https://drive.google.com/file/d/1Dmv40IaUDQy5ZXNWBbU7BXkPswlhlx7J/view?usp=sharing
-Validation Data 
-
 # Basic Information
 Suppose Food Type: 
 - Drink
