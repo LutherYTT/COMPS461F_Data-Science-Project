@@ -37,7 +37,7 @@ total_products_count = load_total_items(nutrition_dataset)
 all_unique_recommended_dishes = set()
 skipped_files_count = 0
 
-all_detection_files = glob.glob('./detect/synthetic_*_detections.txt')
+all_detection_files = glob.glob('/datasets/sample_detections_output/synthetic_*_detections.txt')
 
 for prediction_txt in all_detection_files:
     result, predicted_item = process_prediction_file(prediction_txt, nutrition_dataset)
