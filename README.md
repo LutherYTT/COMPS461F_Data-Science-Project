@@ -9,6 +9,11 @@ Group 4
 
 # Supervisor
 Mr. Jimmy KANG (xkang@hkmu.edu.hk)
+
+# Dataset
+Training Data: https://drive.google.com/file/d/1Dmv40IaUDQy5ZXNWBbU7BXkPswlhlx7J/view?usp=sharing
+Validation Data 
+
 # Basic Information
 Suppose Food Type: 
 - Drink
