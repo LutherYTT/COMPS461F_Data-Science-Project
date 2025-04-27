@@ -8,7 +8,7 @@ Group 4
 - Lu Yuk Tong 13439007 (luyuktong@gmail.com)
 
 # Supervisor
-Jimmy KANG Xudong (xkang@hkmu.edu.hk)
+Mr. Jimmy KANG (xkang@hkmu.edu.hk)
 # Basic Information
 Suppose Food Type: 
 - Drink
