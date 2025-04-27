@@ -1,3 +1,8 @@
+import yaml
+
+with open("config.yml", "r") as file:
+    config = yaml.safe_load(file)
+    
 import os
 import torch
 import numpy as np
