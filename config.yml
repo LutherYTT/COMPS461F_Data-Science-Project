@@ -1,0 +1,50 @@
+# config.yml
+
+##########################
+#### Object Detection ####
+##########################
+
+# Number of output classes for the model
+# basil_garlic_chicken_breast, basil_garlic_chicken_breast(2), black_pepper_chicken_breast, herbs_chicken_breast, bacon_egg_mayo_sandwich,
+# ham_cheese_pickle_sandwich, smoked_salmon_egg_mayo_sandwich, super_club_sandwich, caesar_chicken_cold_wrap, peking_duck_cold_wrap,
+# sesame_chicken_with_baby_spinach_cold_wrap, smoked_salmon_egg_salad_cold_wrap, misc
+num_classes: 13
+
+# Image size (height and width) used for training and inference
+img_size: 834
+
+# Path to the model configuration file
+cfg_file_path: "./config/yolov4-tiny.cfg"
+
+# Path to the finetuned model weights or checkpoint
+model_path: "./weights/baseline_model_epoch_30.pth"
+
+# Confidence threshold for filtering predictions
+conf_threshold: 0.3
+
+# IOU threshold for filtering predictions
+iou_threshold: 0.5
+
+# Number of output predict items (by confidence)
+# If your conf_threshold is low, it is recommended to use a lower top_conf.
+top_conf: 6
+
+##########################
+### Recommender System ###
+##########################
+
+# Recommender system final score calcuate weight
+similarity_weight: 101.0
+association_weight: 1.0
+
+# Datasets for recording the nutritional value of each food item
+nutrition_dataset: "./datasets/7select_Product.csv"
+
+# Nutritional combinations of foods
+preprocess_csv: "./datasets/7select_Product_preprocess.csv"
+
+# Food combinations association rule
+association_rule_csv: "./datasets/association_rule.csv"
+
+
+

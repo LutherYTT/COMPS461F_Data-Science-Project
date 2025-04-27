@@ -208,131 +208,132 @@ def evaluate_model(model, test_loader, device, num_classes):
 
     return calculate_metrics(all_gts, all_preds, num_classes)
 
-# Hyperparameter
-num_classes = config['num_classes']
-img_size = config['img_size']
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-cfg_file = config['cfg_file_path']
+if __name__ == "__main__":
+    # Hyperparameter
+    num_classes = config['num_classes']
+    img_size = config['img_size']
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    cfg_file = config['cfg_file_path']
 
 
-test_list_file = "test.txt"
+    test_list_file = "test.txt"
 
-# Load test dataset
-test_dataset = YoloDataset(test_list_file, img_size=img_size)
-test_loader = DataLoader(
-    test_dataset,
-    batch_size=1,
-    shuffle=False,
-    collate_fn=custom_collate_fn
-)
+    # Load test dataset
+    test_dataset = YoloDataset(test_list_file, img_size=img_size)
+    test_loader = DataLoader(
+        test_dataset,
+        batch_size=1,
+        shuffle=False,
+        collate_fn=custom_collate_fn
+    )
 
-# Get all model checkpoints
-# model_files = sorted(
-#     glob.glob("/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_*.pth"),
-#     key=lambda x: int(re.search(r'epoch_(\d+)', x).group(1))
-# )
-# model_files = ["/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_6.pth",
-#                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_12.pth",
-#                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_18.pth",
-#                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_24.pth",
-#                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_30.pth",
-#                ]
+    # Get all model checkpoints
+    # model_files = sorted(
+    #     glob.glob("/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_*.pth"),
+    #     key=lambda x: int(re.search(r'epoch_(\d+)', x).group(1))
+    # )
+    # model_files = ["/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_6.pth",
+    #                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_12.pth",
+    #                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_18.pth",
+    #                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_24.pth",
+    #                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_30.pth",
+    #                ]
 
-model_files = ["/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_4.pth",
-               "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_8.pth",
-               "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_12.pth",
-               "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_16.pth",
-               "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_20.pth",
-                ]
+    model_files = ["/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_4.pth",
+                   "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_8.pth",
+                   "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_12.pth",
+                   "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_16.pth",
+                   "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_20.pth",
+                    ]
 
-# epoch_no = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30]
-# epoch_no = [6,12,18,24,30]
-epoch_no = [4,8,12,16,20]
+    # epoch_no = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30]
+    # epoch_no = [6,12,18,24,30]
+    epoch_no = [4,8,12,16,20]
 
-# Evaluate all models
-results = []
-for model_file in model_files:
-    print(f"\nEvaluating {model_file}")
+    # Evaluate all models
+    results = []
+    for model_file in model_files:
+        print(f"\nEvaluating {model_file}")
 
-    # Load model
-    model = YOLOv4Tiny(cfg_file, num_classes=num_classes, img_size=img_size)
-    model.load_state_dict(torch.load(model_file, map_location=device))
-    model.to(device)
+        # Load model
+        model = YOLOv4Tiny(cfg_file, num_classes=num_classes, img_size=img_size)
+        model.load_state_dict(torch.load(model_file, map_location=device))
+        model.to(device)
 
-    # Evaluate
-    mAP, precision, recall, f1 = evaluate_model(model, test_loader, device, num_classes)
-    results.append({
-        'epoch': epoch_no,
-        # 'epoch': [4,8,12,16,20],
-        # 'epoch': int(re.search(r'epoch_(\d+)', model_file).group(1)),
-        'mAP': mAP,
-        'precision': precision,
-        'recall': recall,
-        'f1': f1
-    })
+        # Evaluate
+        mAP, precision, recall, f1 = evaluate_model(model, test_loader, device, num_classes)
+        results.append({
+            'epoch': epoch_no,
+            # 'epoch': [4,8,12,16,20],
+            # 'epoch': int(re.search(r'epoch_(\d+)', model_file).group(1)),
+            'mAP': mAP,
+            'precision': precision,
+            'recall': recall,
+            'f1': f1
+        })
 
-    # Free ram
-    del model
-    torch.cuda.empty_cache()
+        # Free ram
+        del model
+        torch.cuda.empty_cache()
 
-# Plot graph
-plt.figure(figsize=(15, 10))
+    # Plot graph
+    plt.figure(figsize=(15, 10))
 
-# mAP
-# plt.subplot(2, 2, 1)
-plt.figure(figsize=(15, 6))
-plt.plot(epoch_no, [r['mAP'] for r in results], 'b-o')
-plt.title('mAP vs Epoch')
-plt.xlabel('Epoch')
-plt.ylabel('mAP')
-plt.grid(True)
-plt.savefig('mAP_Plot.png')
+    # mAP
+    # plt.subplot(2, 2, 1)
+    plt.figure(figsize=(15, 6))
+    plt.plot(epoch_no, [r['mAP'] for r in results], 'b-o')
+    plt.title('mAP vs Epoch')
+    plt.xlabel('Epoch')
+    plt.ylabel('mAP')
+    plt.grid(True)
+    plt.savefig('mAP_Plot.png')
 
-# Precision
-plt.figure(figsize=(15, 6))
-plt.subplot(3, 1, 1)
-plt.plot(epoch_no, [r['precision'] for r in results], 'r-o')
-plt.title('Precision vs Epoch')
-plt.xlabel('Epoch')
-plt.ylabel('Precision')
-plt.ylim(0, 1)
-plt.grid(True)
+    # Precision
+    plt.figure(figsize=(15, 6))
+    plt.subplot(3, 1, 1)
+    plt.plot(epoch_no, [r['precision'] for r in results], 'r-o')
+    plt.title('Precision vs Epoch')
+    plt.xlabel('Epoch')
+    plt.ylabel('Precision')
+    plt.ylim(0, 1)
+    plt.grid(True)
 
-# Recall
-plt.subplot(3, 1, 2)
-plt.plot(epoch_no, [r['recall'] for r in results], 'g-o')
-plt.title('Recall vs Epoch')
-plt.xlabel('Epoch')
-plt.ylabel('Recall')
-plt.ylim(0, 1)
-plt.grid(True)
+    # Recall
+    plt.subplot(3, 1, 2)
+    plt.plot(epoch_no, [r['recall'] for r in results], 'g-o')
+    plt.title('Recall vs Epoch')
+    plt.xlabel('Epoch')
+    plt.ylabel('Recall')
+    plt.ylim(0, 1)
+    plt.grid(True)
 
-# F1 Score
-plt.subplot(3, 1, 3)
-plt.plot(epoch_no, [r['f1'] for r in results], 'm-o')
-plt.title('F1 Score vs Epoch')
-plt.xlabel('Epoch')
-plt.ylabel('F1 Score')
-plt.ylim(0, 1)
-plt.grid(True)
+    # F1 Score
+    plt.subplot(3, 1, 3)
+    plt.plot(epoch_no, [r['f1'] for r in results], 'm-o')
+    plt.title('F1 Score vs Epoch')
+    plt.xlabel('Epoch')
+    plt.ylabel('F1 Score')
+    plt.ylim(0, 1)
+    plt.grid(True)
 
-plt.tight_layout()
-plt.savefig('Precision_Recall_F1_Score_Plot.png')
-plt.show()
+    plt.tight_layout()
+    plt.savefig('Precision_Recall_F1_Score_Plot.png')
+    plt.show()
 
-print("\nEvaluation Results:")
-print("Epoch | mAP   | Precision | Recall | F1 Score")
-print("----------------------------------------------")
-for i in range(len(results)):
-    res = results[i]
-    # Handling the epoch field
-    # epoch = int(res['epoch'])
-    epoch = epoch_no
+    print("\nEvaluation Results:")
+    print("Epoch | mAP   | Precision | Recall | F1 Score")
+    print("----------------------------------------------")
+    for i in range(len(results)):
+        res = results[i]
+        # Handling the epoch field
+        # epoch = int(res['epoch'])
+        epoch = epoch_no
 
-    # Handling others field
-    mAP = res['mAP'].item() if isinstance(res['mAP'], np.ndarray) else res['mAP']
-    precision = res['precision'].item() if isinstance(res['precision'], np.ndarray) else res['precision']
-    recall = res['recall'].item() if isinstance(res['recall'], np.ndarray) else res['recall']
-    f1 = res['f1'].item() if isinstance(res['f1'], np.ndarray) else res['f1']
+        # Handling others field
+        mAP = res['mAP'].item() if isinstance(res['mAP'], np.ndarray) else res['mAP']
+        precision = res['precision'].item() if isinstance(res['precision'], np.ndarray) else res['precision']
+        recall = res['recall'].item() if isinstance(res['recall'], np.ndarray) else res['recall']
+        f1 = res['f1'].item() if isinstance(res['f1'], np.ndarray) else res['f1']
 
-    print(f"{epoch[i]} | {mAP:.3f} | {precision:.3f}   | {recall:.3f} | {f1:.3f}")
+        print(f"{epoch[i]} | {mAP:.3f} | {precision:.3f}   | {recall:.3f} | {f1:.3f}")
