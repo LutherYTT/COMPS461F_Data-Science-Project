@@ -1,8 +1,3 @@
-import yaml
-
-with open("config.yml", "r") as file:
-    config = yaml.safe_load(file)
-
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import cosine_similarity
@@ -68,7 +63,7 @@ def sum_probability(prediction_txt):
     print("All coarse class and fine class probabilities have been statistically integrated.")
     return coarse_prob, fine_prob, predicted_item
 
-def find_suitable_foods(coarse_prob, predicted_items):
+def find_suitable_foods(association_rule_csv, coarse_prob, predicted_items):
     # Save df, easy to merge with csv to calculate final score.
     global confidence_dishes_df  
 
@@ -92,7 +87,6 @@ def find_suitable_foods(coarse_prob, predicted_items):
         predicted_items = [predicted_items]
 
     # From CSV load rules
-    association_rule_csv = config['association_rule_csv']
     rules_df = pd.read_csv(association_rule_csv) 
 
     rules_df['Fine_Class_Consequent'] = rules_df['Fine_Class_Consequent'].astype(str)
@@ -352,8 +346,7 @@ def calculate_nutrition_gap(coarse_prob, fine_prob, nutrition_dataset):
     return nutrition_gap
 
 #def recommend_dish(sum_Energy,sum_Protein,sum_TotalFat,sum_SaturatedFat,sum_TransFat,sum_Carbohydrate,sum_Sugars,sum_Sodium):
-def recommend_dish(nutrition_array):
-    preprocess_csv = config['preprocess_csv'] 
+def recommend_dish(preprocess_csv, nutrition_array):
     df = pd.read_csv(preprocess_csv)
 
     df['sum_Energy'] = df['sum_Energy'].fillna(0)
@@ -419,14 +412,14 @@ def recommend_dish(nutrition_array):
 
 import pandas as pd
 
-def combined_score(nutrition_gap, coarse_prob, food_type_input):
+def combined_score(nutrition_gap, coarse_prob, food_type_input, association_rule_csv, preprocess_csv):
     Similarity_Weight = 101.0
     Association_Weight = 1.0
 
     # Derive confidence_dishes_df by processing input with function
-    confidence_dishes_df = find_suitable_foods(coarse_prob, food_type_input)
+    confidence_dishes_df = find_suitable_foods(coarse_prob, food_type_input, association_rule_csv)
     # Use function to handle inputs to derive recommend_df.
-    recommend_df = recommend_dish(nutrition_gap)
+    recommend_df = recommend_dish(preprocess_csv, nutrition_gap)
 
     # Merger of Csv under ‘Type’
     merged_df = recommend_df.merge(confidence_dishes_df, on='Dish', how='left')

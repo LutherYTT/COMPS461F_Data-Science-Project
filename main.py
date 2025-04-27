@@ -12,6 +12,8 @@ if __name__ == "__main__":
     
     prediction_txt = "./detections_output.txt"
     nutrition_dataset = config['nutrition_dataset']
+    preprocess_csv = config['preprocess_csv'] 
+    association_rule_csv = config['association_rule_csv']
 
     # Integration probability
     coarse_prob, fine_prob, predicted_item = sum_probability(prediction_txt)
@@ -19,7 +21,7 @@ if __name__ == "__main__":
     # Nutrition gap
     nutrition_gap = calculate_nutrition_gap(coarse_prob, fine_prob, nutrition_dataset)
     
-    df = combined_score(nutrition_gap, coarse_prob, predicted_item)
+    df = combined_score(nutrition_gap, coarse_prob, predicted_item, association_rule_csv, preprocess_csv)
 
     output_df = df[['Dish', 'Final_Score']].head(10)
     output_df = output_df.rename(columns={'Dish': 'Food Combination ', 'Final_Score': 'Recommended Index'})
