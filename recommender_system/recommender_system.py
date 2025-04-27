@@ -417,7 +417,7 @@ def combined_score(nutrition_gap, coarse_prob, food_type_input, association_rule
     Association_Weight = 1.0
 
     # Derive confidence_dishes_df by processing input with function
-    confidence_dishes_df = find_suitable_foods(coarse_prob, food_type_input, association_rule_csv)
+    confidence_dishes_df = find_suitable_foods(association_rule_csv, coarse_prob, food_type_input)
     # Use function to handle inputs to derive recommend_df.
     recommend_df = recommend_dish(preprocess_csv, nutrition_gap)
 
