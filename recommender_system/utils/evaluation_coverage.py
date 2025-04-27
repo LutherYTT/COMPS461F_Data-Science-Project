@@ -1,5 +1,17 @@
 import pandas as pd
 import glob
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from recommender_system import *
+
+import yaml
+current_dir = os.path.dirname(os.path.abspath(__file__))
+config_path = os.path.join(current_dir, '../..', 'config.yml')
+config_path = os.path.normpath(config_path)
+with open(config_path, 'r') as file:
+    config = yaml.safe_load(file)
 
 def calculate_coverage(unique_recommended_items, total_count):
     coverage = len(unique_recommended_items) / total_count
@@ -27,17 +39,19 @@ def process_prediction_file(prediction_txt, nutrition_dataset):
     
     # Calculate nutrition gap
     nutrition_gap = calculate_nutrition_gap(coarse_prob, fine_prob, nutrition_dataset)
-
-    df = combined_score(nutrition_gap, coarse_prob, predicted_item)
+    
+    preprocess_csv = "../../datasets/7select_Product_preprocess.csv"
+    association_rule_csv = "../../datasets/association_rule/association_rule_noise_ratio_01.csv"
+    df = combined_score(nutrition_gap, coarse_prob, predicted_item, association_rule_csv, preprocess_csv)
     return df, predicted_item
 
 # Main evaluation
-nutrition_dataset = "./content/7select_Product.csv"
+nutrition_dataset = "../../datasets/7select_Product.csv"
 total_products_count = load_total_items(nutrition_dataset)
 all_unique_recommended_dishes = set()
 skipped_files_count = 0
 
-all_detection_files = glob.glob('/datasets/sample_detections_output/synthetic_*_detections.txt')
+all_detection_files = glob.glob('../../datasets/sample_detections_output/synthetic_*_detections.txt')
 
 for prediction_txt in all_detection_files:
     result, predicted_item = process_prediction_file(prediction_txt, nutrition_dataset)

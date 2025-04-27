@@ -14,19 +14,26 @@ import matplotlib.pyplot as plt
 from pytorchyolov4tiny.models import *
 from pytorchyolov4tiny.loss import *
 
+import yaml
+current_dir = os.path.dirname(os.path.abspath(__file__))
+config_path = os.path.join(current_dir, '../..', 'config.yml')
+config_path = os.path.normpath(config_path)
+with open(config_path, 'r') as file:
+    config = yaml.safe_load(file)
+    
 # Hyperparameters
-num_classes   = 13
-learning_rate = 0.0001
-num_epochs    = 30
-batch_size    = 1
-accum_steps   = 8  # Effective batch size = batch_size * accum_steps
-img_size      = 832
+num_classes   = config['num_classes']
+learning_rate = config['learning_rate']
+num_epochs    = config['num_epochs']
+batch_size    = config['batch_size']
+accum_steps   = config['accum_steps']
+img_size      = config['img_size']
 
 train_list_file = "train.txt"
 val_list_file   = "val.txt"
-model_file = "/content/finetuned_yolov4_tiny_final.pth"
+model_file = "../weights/baseline_model_epoch_30.pth"
 #model_file = "/content/yolov4_tiny_weights_coco.pth"
-cfg_file = "yolov4-tiny.cfg"
+cfg_file = "../config/yolov4-tiny.cfg"
 
 # Array to store metrics
 train_losses = []
@@ -161,8 +168,7 @@ for epoch in range(num_epochs):
 
     # Save the model every 2 epochs
     if (epoch + 1) % 2 == 0:
-        #checkpoint_path = f"./checkpoints/finetuned_yolov4_tiny_epoch_{epoch+1}.pth"
-        checkpoint_path = f"./gdrive/MyDrive/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_{epoch+1}.pth"
+        checkpoint_path = f"./checkpoints/finetuned_yolov4_tiny_epoch_{epoch+1}.pth"
         torch.save(model.state_dict(), checkpoint_path)
         print(f"Checkpoint saved at {checkpoint_path}")
 

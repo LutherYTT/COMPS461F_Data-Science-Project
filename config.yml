@@ -13,6 +13,14 @@ num_classes: 13
 # Image size (height and width) used for training and inference
 img_size: 834
 
+learning_rate: 0.0001
+
+num_epochs: 30
+
+batch_size: 1
+
+accum_steps: 8 # Effective batch size = batch_size * accum_steps
+
 # Path to the model configuration file
 cfg_file_path: "./config/yolov4-tiny.cfg"
 

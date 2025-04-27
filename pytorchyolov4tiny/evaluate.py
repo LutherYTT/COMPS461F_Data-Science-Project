@@ -1,9 +1,11 @@
+import os
 import yaml
-
-with open("config.yml", "r") as file:
+current_dir = os.path.dirname(os.path.abspath(__file__))
+config_path = os.path.join(current_dir, '../..', 'config.yml')
+config_path = os.path.normpath(config_path)
+with open(config_path, 'r') as file:
     config = yaml.safe_load(file)
     
-import os
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
@@ -239,7 +241,7 @@ if __name__ == "__main__":
     #                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_30.pth",
     #                ]
 
-    model_files = ["/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_4.pth",
+    model_files = ["../weights/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_4.pth",
                    "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_8.pth",
                    "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_12.pth",
                    "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_16.pth",
