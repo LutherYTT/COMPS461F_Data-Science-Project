@@ -44,7 +44,7 @@ nutrition_dataset: "./datasets/7select_Product.csv"
 preprocess_csv: "./datasets/7select_Product_preprocess.csv"
 
 # Food combinations association rule
-association_rule_csv: "./datasets/association_rule.csv"
+association_rule_csv: "./datasets/association_rule/association_rule_noise_ratio_01.csv"
 
 
 
