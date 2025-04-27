@@ -11,8 +11,9 @@ Group 4
 Mr. Jimmy KANG (xkang@hkmu.edu.hk)
 
 # Dataset
-Training Data: [https://drive.google.com/file/d/1Dmv40IaUDQy5ZXNWBbU7BXkPswlhlx7J/view?usp=sharing](https://drive.google.com/file/d/1HwEnkcGAbojyMBAgjtRsdpl2rs51Th5U/view?usp=sharing)
-Validation Data 
+- Training Data: https://drive.google.com/file/d/1HwEnkcGAbojyMBAgjtRsdpl2rs51Th5U/view?usp=sharing
+- Validation Data: https://drive.google.com/file/d/1BzfwQlHQfW_jAZRO3ChEZ9s40h-5y5FD/view?usp=sharing
+- Test Data: https://drive.google.com/file/d/1Dmv40IaUDQy5ZXNWBbU7BXkPswlhlx7J/view?usp=sharing
 
 # Basic Information
 Suppose Food Type: 
