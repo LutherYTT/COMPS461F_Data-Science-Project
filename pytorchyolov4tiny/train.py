@@ -133,7 +133,7 @@ for epoch in range(num_epochs):
     train_accuracies.append(avg_train_acc)
 
     epoch_time = time.time() - start
-    print(f"Epoch時間分配 - 總耗時:{epoch_time:.2f}s")
+    print(f"Epoch spend time - {epoch_time:.2f}s")
 
     # Validation loop
     model.eval()

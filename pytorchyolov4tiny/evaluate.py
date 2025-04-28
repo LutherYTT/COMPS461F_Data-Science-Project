@@ -215,8 +215,7 @@ if __name__ == "__main__":
     num_classes = config['num_classes']
     img_size = config['img_size']
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    cfg_file = config['cfg_file_path']
-
+    cfg_file = "../config/yolov4-tiny.cfg"
 
     test_list_file = "test.txt"
 
@@ -231,21 +230,15 @@ if __name__ == "__main__":
 
     # Get all model checkpoints
     # model_files = sorted(
-    #     glob.glob("/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_*.pth"),
+    #     glob.glob("../weights/experiment/learning_rate_experiment/finetuned_yolov4_tiny_epoch_*.pth"),
     #     key=lambda x: int(re.search(r'epoch_(\d+)', x).group(1))
     # )
-    # model_files = ["/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_6.pth",
-    #                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_12.pth",
-    #                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_18.pth",
-    #                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_24.pth",
-    #                "/content/baseline_checkpoint/baseline_3_Checkpoint/finetuned_yolov4_tiny_epoch_30.pth",
-    #                ]
 
-    model_files = ["../weights/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_4.pth",
-                   "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_8.pth",
-                   "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_12.pth",
-                   "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_16.pth",
-                   "/content/baseline_checkpoint/baseline_3_Experiment_2_Checkpoint/finetuned_yolov4_tiny_epoch_20.pth",
+    model_files = ["../weights/experiment/learning_rate_experiment/finetuned_yolov4_tiny_epoch_4.pth",
+                   "../weights/experiment/learning_rate_experiment/finetuned_yolov4_tiny_epoch_8.pth",
+                   "../weights/experiment/learning_rate_experiment/finetuned_yolov4_tiny_epoch_12.pth",
+                   "../weights/experiment/learning_rate_experiment/finetuned_yolov4_tiny_epoch_16.pth",
+                   "../weights/experiment/learning_rate_experiment/finetuned_yolov4_tiny_epoch_20.pth",
                     ]
 
     # epoch_no = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30]

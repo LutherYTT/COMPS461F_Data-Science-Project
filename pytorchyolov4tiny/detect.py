@@ -125,6 +125,51 @@ if __name__ == "__main__":
     with open("config.yml", "r") as file:
         config = yaml.safe_load(file)
 
-    detect_and_save("./input.png", "./detections_output.txt", config['model_path'], 
-                config['cfg_file_path'], config['num_classes'], config['img_size'], 
+    detect_and_save("./input.png", "./detections_output.txt", "../weights/baseline_model_epoch_30.pth", 
+                "../config/yolov4-tiny.cfg", config['num_classes'], config['img_size'], 
                 config['conf_threshold'], config['iou_threshold'], config['top_conf'])
+    # Add visualization code after the existing output
+    output_image_path = "/content/predicted_image.jpg"  # Path to save annotated image
+
+    # Convert model input tensor back to PIL Image
+    input_image = image_tensor.squeeze(0).permute(1, 2, 0).cpu().numpy()
+    input_image = (input_image * 255).astype(np.uint8)
+    base_image = Image.fromarray(input_image)
+    draw = ImageDraw.Draw(base_image)
+
+    # Define colors and font
+    colors = plt.cm.get_cmap('hsv', num_classes)  # Different color for each class
+    font = ImageFont.load_default()
+
+    # Draw each detection
+    for det in final_detections.cpu().numpy():
+        x_center, y_center, width, height = det[:4]
+        conf = det[4]
+        class_id = int(det[5])
+
+        # Convert from center coordinates to corner coordinates
+        x1 = x_center - width/2
+        y1 = y_center - height/2
+        x2 = x_center + width/2
+        y2 = y_center + height/2
+
+        # Get color for this class
+        color = tuple(int(255 * x) for x in colors(class_id/num_classes)[:3])
+
+        # Draw rectangle and label
+        draw.rectangle([x1, y1, x2, y2], outline=color, width=2)
+        label = f"Class {class_id} ({conf:.2f})"
+        text_size = draw.textbbox((0,0), label, font=font)
+        draw.rectangle([x1, y1, x1+text_size[2], y1+text_size[3]], fill=color)
+        draw.text((x1, y1), label, fill="white", font=font)
+
+    # Save and display
+    base_image.save(output_image_path)
+    print(f"\nAnnotated image saved to {output_image_path}")
+
+    # Display using matplotlib
+    plt.figure(figsize=(12, 12))
+    plt.imshow(base_image)
+    plt.axis('off')
+    plt.title("YOLOv4-tiny Predictions")
+    plt.show()
