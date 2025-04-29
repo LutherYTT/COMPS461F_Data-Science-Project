@@ -119,21 +119,12 @@ def detect_and_save(image_path, output_txt_path, model_path, cfg_file, num_class
             class_id = final_detections[i, 5].long()
             print(f"Class: {class_id.item()}, Confidence: {conf.item():.4f}, "
                   f"Box: [x={x.item():.2f}, y={y.item():.2f}, w={w.item():.2f}, h={h.item():.2f}]")
+        predict_boxes("../predicted_image.jpg", final_detections)
     else:
         print("No detections found.")
     print(f"Detections saved to {output_txt_path}")
 
-if __name__ == "__main__":
-    import yaml
-    with open("config.yml", "r") as file:
-        config = yaml.safe_load(file)
-
-    detect_and_save("./input.png", "./detections_output.txt", "../weights/baseline_model_epoch_30.pth", 
-                "../config/yolov4-tiny.cfg", config['num_classes'], config['img_size'], 
-                config['conf_threshold'], config['iou_threshold'], config['top_conf'])
-    # Add visualization code after the existing output
-    output_image_path = "/content/predicted_image.jpg"  # Path to save annotated image
-
+def predict_boxes(output_image_path, final_detections):
     # Convert model input tensor back to PIL Image
     input_image = image_tensor.squeeze(0).permute(1, 2, 0).cpu().numpy()
     input_image = (input_image * 255).astype(np.uint8)
@@ -141,7 +132,7 @@ if __name__ == "__main__":
     draw = ImageDraw.Draw(base_image)
 
     # Define colors and font
-    colors = plt.cm.get_cmap('hsv', num_classes)  # Different color for each class
+    colors = plt.cm.get_cmap('hsv', num_classes) 
     font = ImageFont.load_default()
 
     # Draw each detection
@@ -176,3 +167,12 @@ if __name__ == "__main__":
     plt.axis('off')
     plt.title("YOLOv4-tiny Predictions")
     plt.show()
+    
+if __name__ == "__main__":
+    import yaml
+    with open("config.yml", "r") as file:
+        config = yaml.safe_load(file)
+
+    detect_and_save("./input.png", "./detections_output.txt", "../weights/baseline_model_epoch_30.pth", 
+                "../config/yolov4-tiny.cfg", config['num_classes'], config['img_size'], 
+                config['conf_threshold'], config['iou_threshold'], config['top_conf'])
