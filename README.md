@@ -3,13 +3,12 @@
 # Group 4 - Group Member
 | Name | Email |
 | --- | --- |
-| A | B |
-- Ng Sing Man 13374035 (simon78451213@gmail.com)
-- Kwok Wai Chun 13448631 (shindo.light@gmail.com)
-- Ng Chiu Cheuk 13458384 (brian17659@gmail.com)
-- Chu Sik Hin 13372042 (acalvin701@gmail.com)
-- Chow Chun Ting 13342640 (jaychow603@gmail.com)
-- Lu Yuk Tong 13439007 (luyuktong@gmail.com)
+| Ng Sing Man | simon78451213@gmail.com |
+| Kwok Wai Chun | shindo.light@gmail.com |
+| Ng Chiu Cheuk | brian17659@gmail.com |
+| Chu Sik Hin | acalvin701@gmail.com |
+| Chow Chun Ting | jaychow603@gmail.com |
+| Lu Yuk Tong | luyuktong@gmail.com |
 
 # Supervisor
 Mr. Jimmy KANG (xkang@hkmu.edu.hk)
