@@ -1,5 +1,9 @@
-# Group Member
-Group 4
+# Object Detection of Food Nutrition Label
+
+# Group 4 - Group Member
+| Name | Email |
+| --- | --- |
+| A | B |
 - Ng Sing Man 13374035 (simon78451213@gmail.com)
 - Kwok Wai Chun 13448631 (shindo.light@gmail.com)
 - Ng Chiu Cheuk 13458384 (brian17659@gmail.com)
