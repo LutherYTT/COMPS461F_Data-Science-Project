@@ -18,7 +18,7 @@
 | -- | -- | -- |
 | Training Data | 16000 images | https://drive.google.com/file/d/1HwEnkcGAbojyMBAgjtRsdpl2rs51Th5U/view?usp=sharing |
 | Validation Data | 4000 images | https://drive.google.com/file/d/1BzfwQlHQfW_jAZRO3ChEZ9s40h-5y5FD/view?usp=sharing |
-| Test Data | 4000 images, with new background and misc images, and using larger random transformation | https://drive.google.com/file/d/1Dmv40IaUDQy5ZXNWBbU7BXkPswlhlx7J/view?usp=sharing |
+| Test Data | 4000 images, with new background and misc images, and using larger random transformation (150% of original) | https://drive.google.com/file/d/1Dmv40IaUDQy5ZXNWBbU7BXkPswlhlx7J/view?usp=sharing |
 
 ## **Installation**
 To install this Project, follow these steps:
