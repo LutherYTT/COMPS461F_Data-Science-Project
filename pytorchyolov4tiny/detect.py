@@ -60,7 +60,7 @@ def predict_boxes(output_image_path, final_detections):
     plt.title("YOLOv4-tiny Predictions")
     plt.show()
     
-def detect_and_save(image_path, output_txt_path, model_path, cfg_file, num_classes, img_size, conf_threshold, iou_threshold, top_conf):
+def detect_and_save(image_path, output_txt_path, output_image_path, model_path, cfg_file, num_classes, img_size, conf_threshold, iou_threshold, top_conf):
     """
     Perform object detection on an image using YOLOv4 Tiny and save results to a text file.
     
@@ -163,7 +163,7 @@ def detect_and_save(image_path, output_txt_path, model_path, cfg_file, num_class
             class_id = final_detections[i, 5].long()
             print(f"Class: {class_id.item()}, Confidence: {conf.item():.4f}, "
                   f"Box: [x={x.item():.2f}, y={y.item():.2f}, w={w.item():.2f}, h={h.item():.2f}]")
-        predict_boxes("./output.jpg", final_detections)
+        predict_boxes(output_image_path, final_detections)
     else:
         print("No detections found.")
     print(f"Detections saved to {output_txt_path}")
@@ -173,7 +173,7 @@ if __name__ == "__main__":
     with open("config.yml", "r") as file:
         config = yaml.safe_load(file)
 
-    detect_and_save("./input.png", "./detections_output.txt", "../weights/baseline_model_epoch_30.pth", 
+    detect_and_save("./input.png", "./detections_output.txt", "./output.jpg", "../weights/baseline_model_epoch_30.pth", 
                 "../config/yolov4-tiny.cfg", config['num_classes'], config['img_size'], 
                 config['conf_threshold'], config['iou_threshold'], config['top_conf'])
   
