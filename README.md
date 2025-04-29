@@ -33,3 +33,9 @@ To install this Project, follow these steps:
 2. Navigate to the project directory: **`cd COMPS461F_Data-Science-Project`**
 3. Install requirements.txt: **`pip install -r requirements.txt`**
 4. Run main.py: **`python main.py`**
+
+## **System Overview**
+![Whole System Architecture Graph](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/whole_architecture.drawio.png)
+
+## **Object Detection(Yolov4 Tiny)**
+![Yolo Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Yolo%20architecture%20fixed.drawio.png)
