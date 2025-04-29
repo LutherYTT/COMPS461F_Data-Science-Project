@@ -39,3 +39,8 @@ To install this Project, follow these steps:
 
 ## **Object Detection(Yolov4 Tiny)**
 ![Yolo Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Yolo%20architecture%20fixed.drawio.png)
+![Detection Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Detection.drawio.png)
+#### Our object detection component is powered by the YOLOv4-tiny model, a compact and efficient version of the YOLO (You Only Look Once) real-time object detection framework. We chose YOLOv4-tiny for its optimal trade-off between detection accuracy and processing speed, making it ideal for applications requiring fast analysis of visual data, such as identifying objects in real-time scenarios. The model employs a simplified architecture with convolutional layers for feature extraction, route layers for multi-scale feature integration, and dual YOLO layers to predict bounding boxes and class probabilities across different object sizes. This setup ensures effective detection of diverse objects in input images.
+
+## Recommender System
+
