@@ -16,6 +16,50 @@ def xywh_to_xyxy(boxes):
     y2 = y + h / 2
     return torch.stack((x1, y1, x2, y2), dim=1)
 
+def predict_boxes(output_image_path, final_detections):
+    # Convert model input tensor back to PIL Image
+    input_image = image_tensor.squeeze(0).permute(1, 2, 0).cpu().numpy()
+    input_image = (input_image * 255).astype(np.uint8)
+    base_image = Image.fromarray(input_image)
+    draw = ImageDraw.Draw(base_image)
+
+    # Define colors and font
+    colors = plt.cm.get_cmap('hsv', num_classes) 
+    font = ImageFont.load_default()
+
+    # Draw each detection
+    for det in final_detections.cpu().numpy():
+        x_center, y_center, width, height = det[:4]
+        conf = det[4]
+        class_id = int(det[5])
+
+        # Convert from center coordinates to corner coordinates
+        x1 = x_center - width/2
+        y1 = y_center - height/2
+        x2 = x_center + width/2
+        y2 = y_center + height/2
+
+        # Get color for this class
+        color = tuple(int(255 * x) for x in colors(class_id/num_classes)[:3])
+
+        # Draw rectangle and label
+        draw.rectangle([x1, y1, x2, y2], outline=color, width=2)
+        label = f"Class {class_id} ({conf:.2f})"
+        text_size = draw.textbbox((0,0), label, font=font)
+        draw.rectangle([x1, y1, x1+text_size[2], y1+text_size[3]], fill=color)
+        draw.text((x1, y1), label, fill="white", font=font)
+
+    # Save and display
+    base_image.save(output_image_path)
+    print(f"\nAnnotated image saved to {output_image_path}")
+
+    # Display using matplotlib
+    plt.figure(figsize=(12, 12))
+    plt.imshow(base_image)
+    plt.axis('off')
+    plt.title("YOLOv4-tiny Predictions")
+    plt.show()
+    
 def detect_and_save(image_path, output_txt_path, model_path, cfg_file, num_classes, img_size, conf_threshold, iou_threshold, top_conf):
     """
     Perform object detection on an image using YOLOv4 Tiny and save results to a text file.
@@ -119,6 +163,7 @@ def detect_and_save(image_path, output_txt_path, model_path, cfg_file, num_class
             class_id = final_detections[i, 5].long()
             print(f"Class: {class_id.item()}, Confidence: {conf.item():.4f}, "
                   f"Box: [x={x.item():.2f}, y={y.item():.2f}, w={w.item():.2f}, h={h.item():.2f}]")
+        predict_boxes("./output.jpg", final_detections)
     else:
         print("No detections found.")
     print(f"Detections saved to {output_txt_path}")
@@ -131,48 +176,4 @@ if __name__ == "__main__":
     detect_and_save("./input.png", "./detections_output.txt", "../weights/baseline_model_epoch_30.pth", 
                 "../config/yolov4-tiny.cfg", config['num_classes'], config['img_size'], 
                 config['conf_threshold'], config['iou_threshold'], config['top_conf'])
-    # Add visualization code after the existing output
-    output_image_path = "/content/predicted_image.jpg"  # Path to save annotated image
-
-    # Convert model input tensor back to PIL Image
-    input_image = image_tensor.squeeze(0).permute(1, 2, 0).cpu().numpy()
-    input_image = (input_image * 255).astype(np.uint8)
-    base_image = Image.fromarray(input_image)
-    draw = ImageDraw.Draw(base_image)
-
-    # Define colors and font
-    colors = plt.cm.get_cmap('hsv', num_classes)  # Different color for each class
-    font = ImageFont.load_default()
-
-    # Draw each detection
-    for det in final_detections.cpu().numpy():
-        x_center, y_center, width, height = det[:4]
-        conf = det[4]
-        class_id = int(det[5])
-
-        # Convert from center coordinates to corner coordinates
-        x1 = x_center - width/2
-        y1 = y_center - height/2
-        x2 = x_center + width/2
-        y2 = y_center + height/2
-
-        # Get color for this class
-        color = tuple(int(255 * x) for x in colors(class_id/num_classes)[:3])
-
-        # Draw rectangle and label
-        draw.rectangle([x1, y1, x2, y2], outline=color, width=2)
-        label = f"Class {class_id} ({conf:.2f})"
-        text_size = draw.textbbox((0,0), label, font=font)
-        draw.rectangle([x1, y1, x1+text_size[2], y1+text_size[3]], fill=color)
-        draw.text((x1, y1), label, fill="white", font=font)
-
-    # Save and display
-    base_image.save(output_image_path)
-    print(f"\nAnnotated image saved to {output_image_path}")
-
-    # Display using matplotlib
-    plt.figure(figsize=(12, 12))
-    plt.imshow(base_image)
-    plt.axis('off')
-    plt.title("YOLOv4-tiny Predictions")
-    plt.show()
+  
