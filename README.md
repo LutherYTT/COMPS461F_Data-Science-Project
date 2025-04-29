@@ -1,14 +1,14 @@
 # **Object Detection of Food Nutrition Label**
 
 ## **Member**
-| Name | Email |
+| **Name** | **Email** |
 | --- | --- |
-| Ng Sing Man | simon78451213@gmail.com |
-| Kwok Wai Chun | shindo.light@gmail.com |
-| Ng Chiu Cheuk | brian17659@gmail.com |
-| Chu Sik Hin | acalvin701@gmail.com |
-| Chow Chun Ting | jaychow603@gmail.com |
-| Lu Yuk Tong | luyuktong@gmail.com |
+| **Ng Sing Man** | simon78451213@gmail.com |
+| **Kwok Wai Chun** | shindo.light@gmail.com |
+| **Ng Chiu Cheuk** | brian17659@gmail.com |
+| **Chu Sik Hin** | acalvin701@gmail.com |
+| **Chow Chun Ting** | jaychow603@gmail.com |
+| **Lu Yuk Tong** | luyuktong@gmail.com |
 
 ## **Supervisor**
 ### **Mr. Jimmy KANG (xkang@hkmu.edu.hk)**
