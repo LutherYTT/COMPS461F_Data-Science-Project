@@ -11,7 +11,7 @@
 | Lu Yuk Tong | luyuktong@gmail.com |
 
 ## **Supervisor**
-#### **Mr. Jimmy KANG (xkang@hkmu.edu.hk)**
+### **Mr. Jimmy KANG (xkang@hkmu.edu.hk)**
 
 ## **Dataset**
 | Dataset | Description | File | 
