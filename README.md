@@ -65,7 +65,28 @@ Our object detection uses YOLOv4-tiny for its fast and efficient balance of accu
 ![Yolo Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Yolo%20architecture%20fixed.drawio.png)
 ![Detection Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Detection.drawio.png)
 
-## Recommender System
+### Object Detection(Process)
+Beginning with a raw image that has gone through a generative AI model (SUDOAI) for 3D model generation and recorded the rotations of the 3D model, which are then extracted as different frames, which are pre-processed through background removal and cropping excess white space to get different perspectives of that object, this pre-processed image will be used to synthesize the image for model training.
+![Rotation 3D model](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/model%20generated%20by%20sudoai.gif)
+![Object Detection Process Method Design](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Object_Detection_Preprocess.drawio.png)
+
+### Object Detection(Image Synthesis)
+The pre-processed images are synthesized by applying random backgrounds and transformations (rotation, blur, flip, scaling, positioning, brightness, contrast) in random order to create the dataset. To handle near-far constraints and occlusions, we use a label validation step that discards invalid labels where one object's bounding box is fully inside another, ensuring objects and backgrounds do not improperly overlap.
+![Object Overlapping Problem](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Image_Generate_Covering.drawio.png)
+![Image Synthesis Method Design](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/data%20synthesis.drawio.png)
+
+## **Recommender System**
 Our recommender system is designed to provide personalized food combinations that meet users' nutritional needs while minimizing reliance on explicit user information. It combines two key methods: cosine similarity, using a KD-tree for fast nutrient matching, and association rules mined via FP-Growth from synthetic eating habit data. By tuning weights between these methods, the system delivers relevant recommendations that address nutritional gaps while reducing unsuitable options.
 ![Recommender System Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/recommender_system_architecture.png)
+
+### Recommender System (Food Combination)
+For our recommender system, we generated synthetic transaction data simulating eating habits to ensure diverse association rules. We applied five rules: 1. no repeated food types in a combination; 2. each must include meat or seafood paired with vegetables; 3. only one staple food (rice/noodles) allowed; 4. at most one drink per combination; and 5. sandwiches and wraps never appear together.
+![Food Combination Generation Design](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/synthetic_Transaction.drawio.png)
+
+### Recommender System(Hyperparameter Tuning)
+Our recommender system combines cosine similarity and association rules, each weighted to produce a final ranking score. For hyperparameter tuning, we randomly generate cosine similarity scores and weights, then calculate a loss based on overlapping final scores. By minimizing this loss, we optimize weights to recommend food combinations that effectively address nutritional gaps while avoiding unsuitable suggestions.
+![Hyperparameter Tuning Method Design](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Hyperparameter_Tuning.drawio.png)
+
+
+
 
