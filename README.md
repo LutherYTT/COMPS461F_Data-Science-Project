@@ -87,8 +87,3 @@ For our recommender system, we generated synthetic transaction data simulating e
 Our recommender system combines cosine similarity and association rules, each weighted to produce a final ranking score. For hyperparameter tuning, we randomly generate cosine similarity scores and weights, then calculate a loss based on overlapping final scores. By minimizing this loss, we optimize weights to recommend food combinations that effectively address nutritional gaps while avoiding unsuitable suggestions.
 ![Hyperparameter Tuning Method Design](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Hyperparameter_Tuning.drawio.png)
 
-## **Evaluation**
-
-
-
-
