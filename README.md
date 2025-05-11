@@ -49,6 +49,17 @@ At 7-Eleven stores in Hong Kong, food recognition software identifies items, hel
 | 5 | yolo_annotation_viewer | Visualizes images with their YOLO-format bounding box labels, allowing navigation through the dataset using keyboard keys. |
 | 6 | k_means_based_anchor_calculation_for_object_detection | Computes optimized anchor box sizes for object detection by clustering bounding box dimensions from annotation files using KMeans. |
 
+### Recommender System
+| **Index** | **Name** | **Description** | 
+| -- | -- | -- |
+| 1 | rule_based_food_combination_generator | Generates random food category combinations with specific probability rules and assigns product names, then saves the results to a CSV file. |
+| 2 | generate_nutritional_combinations_of_foods | Generates and saves all possible food item combinations (1 to 5 items) with summed nutritional values from a product CSV file. |
+| 3 | association_rules_mining | Mines frequent itemsets and generates association rules with weighted support and confidence from food combination data, then saves the rules to a CSV file. |
+| 4 | food_combination_snr_calculator | Evaluates food combinations against rules, counts violations as noise, and calculates the signal-to-noise ratio (SNR) to measure data quality. |
+| 5 | weight_tuning_for_cosine_and_association_scores | Finds the best pair of weights to minimize pairwise ranking loss based on cosine similarity and association scores. |
+| 6 | evaluation_coverage | Evaluates recommendation results by processing prediction files, filtering out irrelevant data, combining scores, and calculating the coverage of unique recommended items against the total product dataset. |
+| 7 | plot_association_rule_confidence_distribution | Plots and compares the distributions of coarse and fine class confidence scores from multiple CSV files representing different noise levels. |
+
 ## **Object Detection(Yolov4 Tiny)**
 ![Yolo Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Yolo%20architecture%20fixed.drawio.png)
 ![Detection Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Detection.drawio.png)
