@@ -44,7 +44,7 @@ At 7-Eleven stores in Hong Kong, food recognition software identifies items, hel
 | -- | -- | -- |
 | 1 | video_frame_extractor | Extracts and saves frames from a video at regular time intervals into an output folder. |
 | 2 | batch_background_removal_and_cropping | Removes the background from images in a folder, trims the resulting images to remove extra blank space, converts them to PNG format, and saves them to an output folder. |
-| 3 | synthetic_image_generation_with_random_transformations | Generates synthetic images by randomly composing food and miscellaneous items onto background images with various random transformations, and creates corresponding fine and coarse object detection labels for training machine learning models. It supports multi-threaded batch generation for large datasets. | 
+| 3 | synthetic_image_generation_with_random_transformations | Generates synthetic images by randomly composing food and miscellaneous items onto background images with various random transformations, and creates corresponding fine and coarse object detection labels for training machine learning models. | 
 | 4 | filter_nested_object_labels_in_files | Removes label boxes that are completely inside other boxes from YOLO-format annotation files in a folder. |
 | 5 | yolo_annotation_viewer | Visualizes images with their YOLO-format bounding box labels, allowing navigation through the dataset using keyboard keys. |
 | 6 | k_means_based_anchor_calculation_for_object_detection | Computes optimized anchor box sizes for object detection by clustering bounding box dimensions from annotation files using KMeans. |
