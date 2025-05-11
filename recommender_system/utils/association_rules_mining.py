@@ -61,33 +61,34 @@ def all_nonempty_proper_subsets(itemset):
     s = list(itemset)
     return chain.from_iterable(combinations(s, r) for r in range(1, len(s)))
 
-# Generate association rules
-rules_list = []
-for i in range(len(frequent_itemsets)):
-    itemset = frequent_itemsets['itemsets'][i]
-    if len(itemset) > 1:
-        for antecedent in map(frozenset, all_nonempty_proper_subsets(itemset)):
-            consequent = itemset.difference(antecedent)
-            confidence = calculate_confidence(antecedent, consequent, frequent_itemsets)
-            rules_list.append({
-                'antecedents': antecedent,
-                'consequents': consequent,
-                'Coarse_Class_Confidence': confidence
-            })
-
-# Convert to output DataFrame
-output = pd.DataFrame(rules_list)
-
-# Filter rules by minimum confidence threshold
-min_confidence = 0.001
-output = output[output['Coarse_Class_Confidence'] >= min_confidence]
-
-output['antecedents'] = output['antecedents'].apply(lambda x: ', '.join(list(x)))
-output['consequents'] = output['consequents'].apply(lambda x: ', '.join(list(x)))
-
-output.columns = ['Coarse_Class_Antecedent', 'Coarse_Class_Consequent', 'Coarse_Class_Confidence']
-
-# Save to CSV without weighted_support column
-output.to_csv('./process/Coarse_association_rules_output_01.csv', index=False, header=True, quoting=csv.QUOTE_NONNUMERIC)
-
-print("Association rules have been saved to 'Coarse_association_rules_output_01.csv' with headers.")
+if __name__ == "__main__":
+    # Generate association rules
+    rules_list = []
+    for i in range(len(frequent_itemsets)):
+        itemset = frequent_itemsets['itemsets'][i]
+        if len(itemset) > 1:
+            for antecedent in map(frozenset, all_nonempty_proper_subsets(itemset)):
+                consequent = itemset.difference(antecedent)
+                confidence = calculate_confidence(antecedent, consequent, frequent_itemsets)
+                rules_list.append({
+                    'antecedents': antecedent,
+                    'consequents': consequent,
+                    'Coarse_Class_Confidence': confidence
+                })
+    
+    # Convert to output DataFrame
+    output = pd.DataFrame(rules_list)
+    
+    # Filter rules by minimum confidence threshold
+    min_confidence = 0.001
+    output = output[output['Coarse_Class_Confidence'] >= min_confidence]
+    
+    output['antecedents'] = output['antecedents'].apply(lambda x: ', '.join(list(x)))
+    output['consequents'] = output['consequents'].apply(lambda x: ', '.join(list(x)))
+    
+    output.columns = ['Coarse_Class_Antecedent', 'Coarse_Class_Consequent', 'Coarse_Class_Confidence']
+    
+    # Save to CSV without weighted_support column
+    output.to_csv('./process/Coarse_association_rules_output_01.csv', index=False, header=True, quoting=csv.QUOTE_NONNUMERIC)
+    
+    print("Association rules have been saved to 'Coarse_association_rules_output_01.csv' with headers.")
