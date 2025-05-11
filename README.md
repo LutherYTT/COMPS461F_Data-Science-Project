@@ -38,6 +38,17 @@ At 7-Eleven stores in Hong Kong, food recognition software identifies items, hel
 ## **System Overview**
 ![Whole System Architecture Graph](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/whole_architecture.drawio.png)
 
+## **Utils**
+### Object Detection
+| **Index** | **Name** | **Description** | 
+| -- | -- | -- |
+| 1 | video_frame_extractor | removes the background from images in a folder, trims the resulting images to remove extra blank space, converts them to PNG format, and saves them to an output folder. |
+| 2 | batch_background_removal_and_cropping |  |
+| 3 | synthetic_image_generation_with_random_transformations |  | 
+| 4 | filter_nested_object_labels_in_files |  |
+| 5 | yolo_annotation_viewer |  |
+| 6 | k_means_based_anchor_calculation_for_object_detection |  |
+
 ## **Object Detection(Yolov4 Tiny)**
 ![Yolo Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Yolo%20architecture%20fixed.drawio.png)
 ![Detection Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Detection.drawio.png)
