@@ -61,10 +61,11 @@ At 7-Eleven stores in Hong Kong, food recognition software identifies items, hel
 | 7 | plot_association_rule_confidence_distribution | Plots and compares the distributions of coarse and fine class confidence scores from multiple CSV files representing different noise levels. |
 
 ## **Object Detection(Yolov4 Tiny)**
+Our object detection uses YOLOv4-tiny for its fast and efficient balance of accuracy and speed, ideal for real-time tasks. It features a simplified architecture with convolutional layers for feature extraction, route layers for multi-scale integration, and two YOLO layers to predict bounding boxes and classes at different scales, enabling effective detection of various object sizes.
 ![Yolo Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Yolo%20architecture%20fixed.drawio.png)
 ![Detection Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Detection.drawio.png)
-Our object detection uses YOLOv4-tiny for its fast and efficient balance of accuracy and speed, ideal for real-time tasks. It features a simplified architecture with convolutional layers for feature extraction, route layers for multi-scale integration, and two YOLO layers to predict bounding boxes and classes at different scales, enabling effective detection of various object sizes.
 
 ## Recommender System
-![Recommender System Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/recommender_system_architecture.png)
 Our recommender system is designed to provide personalized food combinations that meet users' nutritional needs while minimizing reliance on explicit user information. It combines two key methods: cosine similarity, using a KD-tree for fast nutrient matching, and association rules mined via FP-Growth from synthetic eating habit data. By tuning weights between these methods, the system delivers relevant recommendations that address nutritional gaps while reducing unsuitable options.
+![Recommender System Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/recommender_system_architecture.png)
+
