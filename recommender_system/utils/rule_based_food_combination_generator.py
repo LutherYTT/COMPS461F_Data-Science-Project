@@ -8,7 +8,7 @@ P3 = 0.85  # Probability that the combination contains no more than one staple f
 P4 = 0.7   # Probability that the combination contains no more than one drink (Drink)
 P5 = 0.75  # Probability that Sandwich and Wrap do not appear in the same combination
 # P6 = 0.75  # Probability that Meat and Seafood do not appear in the same combination (commented out)
-noise_ratio = 0.1  # Noise ratio
+# noise_ratio = 0.1  # Noise ratio
 generate_count = 1000  # Number of combinations to generate
 
 # Food categories
