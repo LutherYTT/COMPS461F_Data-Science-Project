@@ -14,6 +14,7 @@
 - [Object Detection (YOLOv4-Tiny)](#object-detection-yolov4-tiny)
 - [Recommender System](#recommender-system)
 - [Results and Evaluation](#results-and-evaluation)
+- [Analysis of Evaluation Results](#analysis-of-evaluation-results)
 - [Future Work](#future-work)
 
 
@@ -46,63 +47,133 @@ To install this Project, follow these steps:
 3. Install requirements.txt: **`pip install -r requirements.txt`**
 4. Run main.py: **`python main.py`**
 
-![sample input image](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/images/input.png)
-![detection output](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/images/output.jpg)
+
+## **Usage**
+**Example Outputs**:  
+- Sample Input:  
+  ![Sample Input Image](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/images/input.png)  
+- Detection Output:  
+  ![Detection Output](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/images/output.jpg)
+
 
 ## **Introduction**
-The aim of this project is to address the problem of supporting individuals who have diet sensitivity and health-related issues by developing a combination of technological integration with a health awareness approach. The main objectives include focusing on solving the challenges caused by integrating object detection systems into recommendation systems to provide personal food guidance, formulating an enhanced formula and algorithm capable of recommending the best choice of diet for its end-users, and thereby facilitating users in maintaining controlled diets and a healthy physique. 
+This project aims to assist individuals with dietary sensitivities and health concerns by combining object detection and a recommender system. The system detects food items and nutrition labels in images or videos using **YOLOv4-tiny** and provides personalized food recommendations based on nutritional needs and user preferences. It addresses challenges in integrating these technologies to offer practical dietary guidance, helping users maintain healthier lifestyles.
 
-At 7-Eleven stores in Hong Kong, food recognition software identifies items, helping consumers choose healthier options. This technology utilizes Artificial Intelligence, which employs sophisticated algorithms that can detect and locate objects in images or videos. One instantiation of this technology is the YOLO v4 tiny algorithm. Recommended systems are driven by data science. Hybrid methods use collaborative filtering (which considers user behavior) with content-based filtering (which considers item attributes). These tend to yield accurate suggestions. Knowledge-based systems use explicit health-based rules to provide recommendations. 
+The system is inspired by real-world applications, such as food recognition software at 7-Eleven stores in Hong Kong, and leverages:
+- **YOLOv4-tiny**: A lightweight, efficient object detection model.
+- **Hybrid Recommender System**: Combines collaborative filtering (user behavior) and content-based filtering (item attributes) for accurate suggestions.
 
 ## **System Overview**
-![Whole System Architecture Graph](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/whole_architecture.drawio.png)
+The system integrates two core components:
+1. **Object Detection**: Identifies food items and nutrition labels.
+2. **Recommender System**: Suggests personalized food options.
 
-## **Utils**
-### Object Detection
-| **Index** | **Name** | **Description** | 
-| -- | -- | -- |
-| 1 | video_frame_extractor | Extracts and saves frames from a video at regular time intervals into an output folder. |
-| 2 | batch_background_removal_and_cropping | Removes the background from images in a folder, trims the resulting images to remove extra blank space, converts them to PNG format, and saves them to an output folder. |
-| 3 | synthetic_image_generation_with_random_transformations | Generates synthetic images by randomly composing food and miscellaneous items onto background images with various random transformations, and creates corresponding fine and coarse object detection labels for training machine learning models. | 
-| 4 | filter_nested_object_labels_in_files | Removes label boxes that are completely inside other boxes from YOLO-format annotation files in a folder. |
-| 5 | yolo_annotation_viewer | Visualizes images with their YOLO-format bounding box labels, allowing navigation through the dataset using keyboard keys. |
-| 6 | k_means_based_anchor_calculation_for_object_detection | Computes optimized anchor box sizes for object detection by clustering bounding box dimensions from annotation files using KMeans. |
+![System Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/whole_architecture.drawio.png)
 
-### Recommender System
-| **Index** | **Name** | **Description** | 
-| -- | -- | -- |
-| 1 | rule_based_food_combination_generator | Generates random food category combinations with specific probability rules and assigns product names, then saves the results to a CSV file. |
-| 2 | generate_nutritional_combinations_of_foods | Generates and saves all possible food item combinations (1 to 5 items) with summed nutritional values from a product CSV file. |
-| 3 | association_rules_mining | Mines frequent itemsets and generates association rules with weighted support and confidence from food combination data, then saves the rules to a CSV file. |
-| 4 | food_combination_snr_calculator | Evaluates food combinations against rules, counts violations as noise, and calculates the signal-to-noise ratio (SNR) to measure data quality. |
-| 5 | weight_tuning_for_cosine_and_association_scores | Finds the best pair of weights to minimize pairwise ranking loss based on cosine similarity and association scores. |
-| 6 | evaluation_coverage | Evaluates recommendation results by processing prediction files, filtering out irrelevant data, combining scores, and calculating the coverage of unique recommended items against the total product dataset. |
-| 7 | plot_association_rule_confidence_distribution | Plots and compares the distributions of coarse and fine class confidence scores from multiple CSV files representing different noise levels. |
 
-## **Object Detection(Yolov4 Tiny)**
-Our object detection uses YOLOv4-tiny for its fast and efficient balance of accuracy and speed, ideal for real-time tasks. It features a simplified architecture with convolutional layers for feature extraction, route layers for multi-scale integration, and two YOLO layers to predict bounding boxes and classes at different scales, enabling effective detection of various object sizes.
-![Yolo Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Yolo%20architecture%20fixed.drawio.png)
-![Detection Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Detection.drawio.png)
+## **Utilities**
+### **Object Detection Utilities**
+| **Index** | **Name**                                   | **Description**                                                                                     |
+|-----------|--------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| 1         | `video_frame_extractor`                   | Extracts frames from videos at regular intervals.                                                  |
+| 2         | `batch_background_removal_and_cropping`   | Removes backgrounds and crops images to focus on objects, saving them as PNGs.                     |
+| 3         | `synthetic_image_generation_with_random_transformations` | Generates synthetic images with random transformations for training.                  |
+| 4         | `filter_nested_object_labels_in_files`    | Removes invalid nested bounding boxes from YOLO annotations.                                       |
+| 5         | `yolo_annotation_viewer`                  | Visualizes images with YOLO bounding boxes, navigable via keyboard.                                |
+| 6         | `k_means_based_anchor_calculation_for_object_detection` | Calculates optimized anchor box sizes using KMeans clustering.                       |
 
-### Object Detection(Process)
-Beginning with a raw image that has gone through a generative AI model (SUDOAI) for 3D model generation and recorded the rotations of the 3D model, which are then extracted as different frames, which are pre-processed through background removal and cropping excess white space to get different perspectives of that object, this pre-processed image will be used to synthesize the image for model training.
+### **Recommender System Utilities**
+| **Index** | **Name**                                   | **Description**                                                                                     |
+|-----------|--------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| 1         | `rule_based_food_combination_generator`   | Generates synthetic food combinations based on predefined rules, saved as CSV.                     |
+| 2         | `generate_nutritional_combinations_of_foods` | Creates all possible food combinations (1-5 items) with summed nutritional values.              |
+| 3         | `association_rules_mining`                | Mines association rules from synthetic data using FP-Growth, saved as CSV.                         |
+| 4         | `food_combination_snr_calculator`         | Calculates signal-to-noise ratio to evaluate combination quality.                                  |
+| 5         | `weight_tuning_for_cosine_and_association_scores` | Tunes weights for combining cosine similarity and association scores.                      |
+| 6         | `evaluation_coverage`                     | Measures recommendation coverage against the product dataset.                                      |
+| 7         | `plot_association_rule_confidence_distribution` | Plots confidence score distributions for association rules across noise levels.              |
+
+
+## **Object Detection (YOLOv4-Tiny)**
+We use **YOLOv4-tiny** for its speed and efficiency, ideal for real-time detection. Its architecture includes:
+- Convolutional layers for feature extraction.
+- Route layers for multi-scale feature integration.
+- Two YOLO layers for detecting objects at different scales.
+
+**Why YOLOv4-tiny?** It offers a lightweight alternative to larger models like YOLOv4, balancing accuracy and performance on resource-constrained devices.
+
+![YOLO Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Yolo%20architecture%20fixed.drawio.png)  
+![Detection Workflow](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Detection.drawio.png)
+
+
+### **Process**
+1. **3D Model Generation**: Use SUDOAI to create 3D food models and record rotations.
+2. **Frame Extraction**: Extract frames from 3D model rotations.
+3. **Preprocessing**: Remove backgrounds and crop excess space.
+4. **Image Synthesis**: Apply random transformations (e.g., rotation, blur) for training data.
+5. **Label Validation**: Discard overlapping or invalid bounding boxes.
+
 ![Rotation 3D model](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/model%20generated%20by%20sudoai.gif)
-![Object Detection Process Method Design](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Object_Detection_Preprocess.drawio.png)
+![Object Detection Process](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Object_Detection_Preprocess.drawio.png)
 
-### Object Detection(Image Synthesis)
-The pre-processed images are synthesized by applying random backgrounds and transformations (rotation, blur, flip, scaling, positioning, brightness, contrast) in random order to create the dataset. To handle near-far constraints and occlusions, we use a label validation step that discards invalid labels where one object's bounding box is fully inside another, ensuring objects and backgrounds do not improperly overlap.
-![Image Synthesis Method Design](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/data%20synthesis.drawio.png)
+### **Image Synthesis**
+Synthetic images are created by adding random backgrounds and transformations to preprocessed images, ensuring robustness. Overlaps are managed by validating labels to avoid occlusion issues.
+
+![Image Synthesis](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/data%20synthesis.drawio.png)
 ![Object Overlapping Problem](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Image_Generate_Covering.drawio.png)
 
 ## **Recommender System**
-Our recommender system is designed to provide personalized food combinations that meet users' nutritional needs while minimizing reliance on explicit user information. It combines two key methods: cosine similarity, using a KD-tree for fast nutrient matching, and association rules mined via FP-Growth from synthetic eating habit data. By tuning weights between these methods, the system delivers relevant recommendations that address nutritional gaps while reducing unsuitable options.
+The recommender system delivers personalized food suggestions using:
+- **Cosine Similarity**: Matches nutrients quickly via KD-tree.
+- **Association Rules**: Mined with FP-Growth from synthetic transaction data.
+
+Weights between these methods are tuned to optimize recommendation quality.
+
 ![Recommender System Architecture](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/recommender_system_architecture.png)
 
-### Recommender System (Food Combination)
-For our recommender system, we generated synthetic transaction data simulating eating habits to ensure diverse association rules. We applied five rules: 1. no repeated food types in a combination; 2. each must include meat or seafood paired with vegetables; 3. only one staple food (rice/noodles) allowed; 4. at most one drink per combination; and 5. sandwiches and wraps never appear together.
-![Food Combination Generation Design](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/synthetic_Transaction.drawio.png)
 
-### Recommender System(Hyperparameter Tuning)
-Our recommender system combines cosine similarity and association rules, each weighted to produce a final ranking score. For hyperparameter tuning, we randomly generate cosine similarity scores and weights, then calculate a loss based on overlapping final scores. By minimizing this loss, we optimize weights to recommend food combinations that effectively address nutritional gaps while avoiding unsuitable suggestions.
-![Hyperparameter Tuning Method Design](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Hyperparameter_Tuning.drawio.png)
+### **Food Combination Generation**
+Synthetic transaction data is generated with rules:
+1. No repeated food types.
+2. Meat/seafood paired with vegetables.
+3. One staple food (e.g., rice) per combination.
+4. Maximum one drink.
+5. Sandwiches and wraps never co-occur.
 
+![Food Combination Generation](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/synthetic_Transaction.drawio.png)
+
+
+### **Hyperparameter Tuning**
+Weights for cosine similarity and association rules are optimized by minimizing a loss function based on score overlap, ensuring relevant recommendations.
+
+![Hyperparameter Tuning](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/architecture_graph/Hyperparameter_Tuning.drawio.png)
+
+
+## **Results and Evaluation**
+- **Object Detection**: Achieved 37% mean Average Precision and 85.6% Precision on the test set.
+![mAP plot](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/evaluate_graph/(experiment2)mAP_Plot.png)
+![score plot](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/evaluate_graph/(experiment2)Score_Plot.png)
+
+- **Recommender System**: Covered [insert percentage]% of the product dataset with [insert precision]% precision (update with your metrics).
+
+
+### **Analysis of Evaluation Results**
+The following table presents the evaluation metrics for our object detection model at various training epochs:
+
+| Epoch | mAP   | Precision | Recall | F1 Score |
+|-------|-------|-----------|--------|----------|
+| 4     | 0.368 | 0.815     | 0.446  | 0.577    |
+| 8     | 0.384 | 0.681     | 0.495  | 0.573    |
+| 12    | 0.382 | 0.799     | 0.467  | 0.589    |
+| 16    | 0.339 | 0.582     | 0.471  | 0.521    |
+| 20    | 0.370 | 0.856     | 0.390  | 0.536    |
+
+Upon analyzing these results, we observe that the precision is consistently higher than the mean Average Precision (mAP), Recall, and F1 score across all epochs. This discrepancy arises due to the characteristics of the synthetic dataset used for training and evaluation. The background images selected for image synthesis contain a large number of miscellaneous objects that were not labeled as part of the target classes. Since the labels were added during the synthesis process and did not account for these pre-existing background objects, the model faces difficulty detecting all labeled objects accurately. This leads to missed detections, resulting in lower recall. However, when the model does make a detection, it is typically correct, which contributes to the high precision. The presence of these unlabeled miscellaneous objects primarily impacts the recall, consequently lowering the mAP and F1 score, which are more sensitive to missed detections.
+
+To address this issue and enhance the model's overall performance, we propose a solution: during the image synthesis process, use background images that contain fewer miscellaneous objects. This adjustment will allow the model to better focus on detecting the labeled objects, thereby improving metrics such as recall, mAP, and F1 score.
+
+
+## **Future Work**
+- Incorporate real-world images into the dataset.
+- Explore advanced models like YOLOv5 or EfficientDet.
+- Add user feedback to improve recommendations.
