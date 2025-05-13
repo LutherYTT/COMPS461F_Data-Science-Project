@@ -1,24 +1,43 @@
-# **Object Detection of Food Nutrition Label**
+# **Food Nutrition Label Detection and Recommendation System**
 
-## **Member**
-| **Name** | **Email** |
-| --- | --- |
-| **Ng Sing Man** | simon78451213@gmail.com |
-| **Kwok Wai Chun** | shindo.light@gmail.com |
-| **Ng Chiu Cheuk** | brian17659@gmail.com |
-| **Chu Sik Hin** | acalvin701@gmail.com |
-| **Chow Chun Ting** | jaychow603@gmail.com |
-| **Lu Yuk Tong** | luyuktong@gmail.com |
+## **Table of Contents**
+- [Team Members](#team-members)
+- [Supervisor](#supervisor)
+- [Datasets](#datasets)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Introduction](#introduction)
+- [System Overview](#system-overview)
+- [Utilities](#utilities)
+  - [Object Detection Utilities](#object-detection-utilities)
+  - [Recommender System Utilities](#recommender-system-utilities)
+- [Object Detection (YOLOv4-Tiny)](#object-detection-yolov4-tiny)
+- [Recommender System](#recommender-system)
+- [Results and Evaluation](#results-and-evaluation)
+- [Future Work](#future-work)
+
+
+## **Team Members**
+| **Name**         | **Email**              |
+|-------------------|------------------------|
+| Ng Sing Man      | simon78451213@gmail.com |
+| Kwok Wai Chun    | shindo.light@gmail.com |
+| Ng Chiu Cheuk    | brian17659@gmail.com  |
+| Chu Sik Hin      | acalvin701@gmail.com  |
+| Chow Chun Ting   | jaychow603@gmail.com  |
+| Lu Yuk Tong      | luyuktong@gmail.com   |
 
 ## **Supervisor**
-### **Mr. Jimmy KANG (xkang@hkmu.edu.hk)**
+**Mr. Jimmy Kang**  
+Email: [xkang@hkmu.edu.hk](mailto:xkang@hkmu.edu.hk)
 
-## **Dataset**
-| **Dataset** | **Description** | **File** | 
-| -- | -- | -- |
-| Training Data | 16000 images | https://drive.google.com/file/d/1HwEnkcGAbojyMBAgjtRsdpl2rs51Th5U/view?usp=sharing |
-| Validation Data | 4000 images | https://drive.google.com/file/d/1BzfwQlHQfW_jAZRO3ChEZ9s40h-5y5FD/view?usp=sharing |
-| Test Data | 4000 images, with new background and misc images, and using larger random transformation (150% of original) | https://drive.google.com/file/d/1Dmv40IaUDQy5ZXNWBbU7BXkPswlhlx7J/view?usp=sharing |
+## **Datasets**
+| **Dataset**      | **Description**                                                                 | **Link**                                                                                       |
+|-------------------|---------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| Training Data    | 16,000 synthetic images with annotations for food items and nutrition labels.   | [Download](https://drive.google.com/file/d/1HwEnkcGAbojyMBAgjtRsdpl2rs51Th5U/view?usp=sharing) |
+| Validation Data  | 4,000 synthetic images used for model validation.                              | [Download](https://drive.google.com/file/d/1BzfwQlHQfW_jAZRO3ChEZ9s40h-5y5FD/view?usp=sharing) |
+| Test Data        | 4,000 images with new backgrounds, miscellaneous items, and larger transformations (150% of original size) for robust testing. | [Download](https://drive.google.com/file/d/1Dmv40IaUDQy5ZXNWBbU7BXkPswlhlx7J/view?usp=sharing) |
+
 
 ## **Installation**
 To install this Project, follow these steps:
