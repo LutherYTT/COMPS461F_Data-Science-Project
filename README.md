@@ -14,8 +14,8 @@
 - [Object Detection (YOLOv4-Tiny)](#object-detection-yolov4-tiny)
 - [Recommender System](#recommender-system)
 - [Results and Evaluation](#results-and-evaluation)
-  - [Object Detection](#object-detection)
-  - [Recommender System](#recommender-system)  
+  - [Object Detection](#object-detection-results)
+  - [Recommender System](#recommender-system-results)  
   - [Analysis of Evaluation Results](#analysis-of-evaluation-results)
 - [Future Work](#future-work)
 
@@ -152,7 +152,7 @@ Weights for cosine similarity and association rules are optimized by minimizing 
 
 
 ## **Results and Evaluation**
-### Object Detection
+### **Object Detection Results**
 In our object detection experiments, we assessed model performance using **F1-score**, **Recall**, **Precision**, and **mean Average Precision (mAP)**. The following sections detail the results and analyses from three distinct experiments with varying training configurations.
 #### Experiment 1: Learning Rate = 0.001
 **Evaluation Results:**
@@ -163,6 +163,7 @@ In our object detection experiments, we assessed model performance using **F1-sc
 | 12    | 0.278 | 0.789     | 0.339  | 0.474    |
 | 16    | 0.287 | 0.632     | 0.437  | 0.517    |
 | 20    | 0.400 | 0.389     | 0.527  | 0.448    |
+
 **Analysis:**  
 With a learning rate of 0.001, the model’s learning accelerated, but precision, recall, and F1-score declined over epochs. Meanwhile, mAP increased, suggesting improved object detection despite the trade-off. This indicates faster convergence, potentially leading to overfitting, as the model struggles to generalize, lowering precision and recall.
 #### Experiment 2: SGD with Momentum and Weight Decay
@@ -174,6 +175,7 @@ With a learning rate of 0.001, the model’s learning accelerated, but precision
 | 12    | 0.382 | 0.799     | 0.467  | 0.589    |
 | 16    | 0.339 | 0.582     | 0.471  | 0.521    |
 | 20    | 0.370 | 0.856     | 0.390  | 0.536    |
+
 **Analysis:**  
 Switching to Stochastic Gradient Descent (SGD) with momentum and weight decay resulted in fluctuating precision, recall, and F1-scores, with inconsistent mAP. These variations stem from SGD’s sensitivity to data noise, causing unstable updates and inconsistent performance as the model adapts to noisy samples.
 #### Experiment 3: Learning Rate Schedule
@@ -185,10 +187,11 @@ Switching to Stochastic Gradient Descent (SGD) with momentum and weight decay re
 | 12    | 0.284 | 0.692     | 0.405  | 0.511    |
 | 16    | 0.254 | 0.774     | 0.330  | 0.463    |
 | 20    | 0.360 | 0.591     | 0.456  | 0.515    |
+
 **Analysis:**  
 A learning rate schedule stabilized precision, recall, and F1-scores by avoiding disruptive updates. Although mAP fluctuated, it showed an upward trend, reflecting consistent improvement in detection performance over time.
 
-### **Recommender System**
+### **Recommender System Results**
 #### Impact of Noise on Model Confidence
 ![Confidence Distributions Plot](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/evaluate_graph/(recommender_system)confidence_distributions_lines.png)
 This section examines how noise levels in a synthetic dataset affect the model's confidence, visualized through a line chart. The chart separates confidence into coarse and fine class categories.
