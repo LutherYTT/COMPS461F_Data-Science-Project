@@ -14,7 +14,9 @@
 - [Object Detection (YOLOv4-Tiny)](#object-detection-yolov4-tiny)
 - [Recommender System](#recommender-system)
 - [Results and Evaluation](#results-and-evaluation)
-- [Analysis of Evaluation Results](#analysis-of-evaluation-results)
+  - [Object Detection](#object-detection)
+  - [Recommender System](#recommender-system)  
+  - [Analysis of Evaluation Results](#analysis-of-evaluation-results)
 - [Future Work](#future-work)
 
 
@@ -150,11 +152,61 @@ Weights for cosine similarity and association rules are optimized by minimizing 
 
 
 ## **Results and Evaluation**
-- **Object Detection**: Achieved 37% mean Average Precision and 85.6% Precision on the test set.
-![mAP plot](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/evaluate_graph/(experiment2)mAP_Plot.png)
-![score plot](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/evaluate_graph/(experiment2)Score_Plot.png)
+### Object Detection
+In our object detection experiments, we assessed model performance using **F1-score**, **Recall**, **Precision**, and **mean Average Precision (mAP)**. The following sections detail the results and analyses from three distinct experiments with varying training configurations.
+#### Experiment 1: Learning Rate = 0.001
+**Evaluation Results:**
+| Epoch | mAP   | Precision | Recall | F1 Score |
+|-------|-------|-----------|--------|----------|
+| 4     | 0.228 | 0.815     | 0.225  | 0.353    |
+| 8     | 0.237 | 0.840     | 0.160  | 0.268    |
+| 12    | 0.278 | 0.789     | 0.339  | 0.474    |
+| 16    | 0.287 | 0.632     | 0.437  | 0.517    |
+| 20    | 0.400 | 0.389     | 0.527  | 0.448    |
+**Analysis:**  
+With a learning rate of 0.001, the model’s learning accelerated, but precision, recall, and F1-score declined over epochs. Meanwhile, mAP increased, suggesting improved object detection despite the trade-off. This indicates faster convergence, potentially leading to overfitting, as the model struggles to generalize, lowering precision and recall.
+#### Experiment 2: SGD with Momentum and Weight Decay
+**Evaluation Results:**
+| Epoch | mAP   | Precision | Recall | F1 Score |
+|-------|-------|-----------|--------|----------|
+| 4     | 0.368 | 0.815     | 0.446  | 0.577    |
+| 8     | 0.384 | 0.681     | 0.495  | 0.573    |
+| 12    | 0.382 | 0.799     | 0.467  | 0.589    |
+| 16    | 0.339 | 0.582     | 0.471  | 0.521    |
+| 20    | 0.370 | 0.856     | 0.390  | 0.536    |
+**Analysis:**  
+Switching to Stochastic Gradient Descent (SGD) with momentum and weight decay resulted in fluctuating precision, recall, and F1-scores, with inconsistent mAP. These variations stem from SGD’s sensitivity to data noise, causing unstable updates and inconsistent performance as the model adapts to noisy samples.
+#### Experiment 3: Learning Rate Schedule
+**Evaluation Results:**
+| Epoch | mAP   | Precision | Recall | F1 Score |
+|-------|-------|-----------|--------|----------|
+| 4     | 0.211 | 0.864     | 0.173  | 0.288    |
+| 8     | 0.258 | 0.830     | 0.299  | 0.439    |
+| 12    | 0.284 | 0.692     | 0.405  | 0.511    |
+| 16    | 0.254 | 0.774     | 0.330  | 0.463    |
+| 20    | 0.360 | 0.591     | 0.456  | 0.515    |
+**Analysis:**  
+A learning rate schedule stabilized precision, recall, and F1-scores by avoiding disruptive updates. Although mAP fluctuated, it showed an upward trend, reflecting consistent improvement in detection performance over time.
 
-- **Recommender System**: Covered [insert percentage]% of the product dataset with [insert precision]% precision (update with your metrics).
+### **Recommender System**
+#### Impact of Noise on Model Confidence
+![Confidence Distributions Plot](https://github.com/LutherYTT/COMPS461F_Data-Science-Project/blob/main/assets/evaluate_graph/(recommender_system)confidence_distributions_lines.png)
+This section examines how noise levels in a synthetic dataset affect the model's confidence, visualized through a line chart. The chart separates confidence into coarse and fine class categories.
+
+- **Key Findings:**
+  - Higher noise levels reduce the model's confidence.
+  - Confidence decreases as noise increases, observed across both coarse and fine classes.
+
+These results emphasize the need to control noise to ensure reliable model predictions.
+
+#### Recommender System Coverage
+Coverage was assessed using outputs from 100 object detections, measuring the proportion of food items recommended by the system.
+
+- **Results:**
+  - **Coverage:** 50% (only half of the food items are recommended).
+  - **Context:** This is acceptable given the system’s focus on addressing nutritional gaps and the limited variety of available food options.
+
+While not optimal, the 50% coverage reflects a practical balance between relevance and the constraints of the dataset.
 
 
 ### **Analysis of Evaluation Results**
