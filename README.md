@@ -1,4 +1,4 @@
-# **Food Nutrition Label Detection and Recommendation System**
+# **Integrated Food Object Detection and Nutrition-Based Recommender System**
 
 ## **Table of Contents**
 - [Team Members](#team-members)
