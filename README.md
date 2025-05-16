@@ -43,12 +43,27 @@ Email: [xkang@hkmu.edu.hk](mailto:xkang@hkmu.edu.hk)
 
 
 ## **Installation**
-To install this Project, follow these steps:
-1. Clone the repository: **`git clone [https://github.com/username/project-title.git](https://github.com/LutherYTT/COMPS461F_Data-Science-Project.git)`**
-2. Navigate to the project directory: **`cd COMPS461F_Data-Science-Project`**
-3. Install requirements.txt: **`pip install -r requirements.txt`**
-4. Run main.py: **`python main.py`**
-
+To install this Project, follow these steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/LutherYTT/Integrated-Food-Object-Detection-and-Nutrition-Based-Recommender-System.git
+   ```
+2. Navigate to the project directory
+   ```bash
+   cd Integrated-Food-Object-Detection-and-Nutrition-Based-Recommender-System
+   ```
+3. **Install Dependencies**:
+   Create a virtual environment and install required packages:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+4. Run main.py
+   If you wish to change the model or the input image, please modify the corresponding settings in the config.yml file prior to running the script.
+   ```bash
+   python main.py
+   ```
 
 ## **Usage**
 **Example Outputs**:  
