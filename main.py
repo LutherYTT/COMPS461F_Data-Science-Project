@@ -6,7 +6,7 @@ if __name__ == "__main__":
     with open("config.yml", "r") as file:
         config = yaml.safe_load(file)
 
-    detect_and_save(config['input_image_path'], "./detections_output.txt", config['model_path'], 
+    detect_and_save(config['input_image_path'], config['output_file_path'], config['model_path'], 
                 config['cfg_file_path'], config['num_classes'], config['img_size'], 
                 config['conf_threshold'], config['iou_threshold'], config['top_conf'])
     
