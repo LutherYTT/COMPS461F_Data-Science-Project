@@ -23,6 +23,8 @@ accum_steps: 8 # Effective batch size = batch_size * accum_steps
 
 input_image_path: "./assets/images/input.png"
 
+output_file_path: "./detections_output.txt"
+
 # Path to the model configuration file
 cfg_file_path: "./config/yolov4-tiny.cfg"
 
