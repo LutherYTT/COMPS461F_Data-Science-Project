@@ -21,10 +21,15 @@ batch_size: 1
 
 accum_steps: 8 # Effective batch size = batch_size * accum_steps
 
+input_image_path: "./assets/images/input.png"
+
 # Path to the model configuration file
 cfg_file_path: "./config/yolov4-tiny.cfg"
 
 # Path to the finetuned model weights or checkpoint
+# "./weights/experiment/learning_rate_experiment/finetuned_yolov4_tiny_epoch_20.pth" # learning rate experiment model
+# "./weights/experiment/learning_rate_scheduler_experiment/finetuned_yolov4_tiny_epoch_20.pth" # learning rate scheduler experiment model
+# "./weights/experiment/sgd_with_momentum_experiment/finetuned_yolov4_tiny_epoch_20.pth" # sgd with momentum experiment model
 model_path: "./weights/baseline_model_epoch_30.pth"
 
 # Confidence threshold for filtering predictions
