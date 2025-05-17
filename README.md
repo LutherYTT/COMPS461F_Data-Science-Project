@@ -20,7 +20,7 @@
 - [Future Work](#future-work)
 
 
-## **Team Members**
+## **Contributors**
 | **Name**         | **Email**              |
 |-------------------|------------------------|
 | Ng Sing Man      | simon78451213@gmail.com |
